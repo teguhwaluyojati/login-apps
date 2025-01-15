@@ -29,6 +29,13 @@ class UserUpdateController extends Controller
             ], 422);
         }
 
+        if (Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'status' => false,
+                'message' => 'New password cannot be the same as the current password'
+            ], 400);
+        }
+
         $userData = $request->only(['name', 'email']);
 
         if ($request->has('password')) {
@@ -37,14 +44,7 @@ class UserUpdateController extends Controller
 
         $user->update($userData);
 
-        $data = [
-            'name' =>
-            $user->name,
-            'email' =>
-            $user->email,
-            'updated_at' =>
-            $user->updated_at
-        ];
+        $data = $user->only(['name', 'email', 'updated_at']);
 
         return response()->json([
             'status' => true,
