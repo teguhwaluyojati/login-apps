@@ -18,7 +18,7 @@ class UserUpdateController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'string|max:255',
             'email' => 'string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -37,10 +37,19 @@ class UserUpdateController extends Controller
 
         $user->update($userData);
 
+        $data = [
+            'name' =>
+            $user->name,
+            'email' =>
+            $user->email,
+            'updated_at' =>
+            $user->updated_at
+        ];
+
         return response()->json([
             'status' => true,
             'message' => 'User updated successfully',
-            'user' => $user
+            'data' => $data
         ], 200);
     }
 }

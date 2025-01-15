@@ -25,13 +25,5 @@ Route::middleware(['auth:sanctum', CheckTokenExpiration::class])->group(function
             'data' => 'This is protected data.',
         ]);
     });
-    Route::put('/user/update', [UserUpdateController::class, 'updatePassword']);
+    Route::put('/user/update', [UserUpdateController::class, 'updatePassword']); //api update password
 });
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-// Route::middleware('auth:sanctum')->group(function () {
-//     Route::post('/user/update', [UserController::class, 'update']);
-// });
