@@ -5,12 +5,12 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\UserUpdateController;
-
+use App\Http\Middleware\CheckTokenExpiration;
 
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', CheckTokenExpiration::class])->group(function () {
     Route::get('/user', function (Request $request) {
         return response()->json([
             'status' => true,
