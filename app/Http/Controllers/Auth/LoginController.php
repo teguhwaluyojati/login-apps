@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
-
-
 class LoginController extends Controller
 {
     public function login(Request $request)
