@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserUpdateController extends Controller
@@ -49,6 +49,27 @@ class UserUpdateController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'User updated successfully',
+            'data' => $data
+        ], 200);
+    }
+
+    public function deleteUserById(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        $data = $user->only(['name', 'email']);
+        $user->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Successfully deleted user',
             'data' => $data
         ], 200);
     }
