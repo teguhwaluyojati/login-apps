@@ -32,13 +32,11 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'status' => true,
             'mesage' => 'User registered successfully',
-            'user' => $user,
-            'token' => $token
+            'user' => $user
         ], 201);
     }
 }
