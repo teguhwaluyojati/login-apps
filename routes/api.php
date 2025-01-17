@@ -17,8 +17,6 @@ Route::middleware(['auth:sanctum', CheckTokenExpiration::class])->group(function
             'user' => $request->user(),
         ]);
     });
-    Route::post('/user/logout', [LoginController::class, 'logout']);
-
 
     Route::get('/protected-data', function () {
         return response()->json([
@@ -28,5 +26,5 @@ Route::middleware(['auth:sanctum', CheckTokenExpiration::class])->group(function
     });
     Route::put('/user/update', [UserUpdateController::class, 'updatePassword']); //api update password
     Route::delete('/user/delete/{id}', [UserUpdateController::class, 'deleteUserById']); //api delete user by id
-    Route::delete('/user/delete/{id}', [UserUpdateController::class, 'deleteUserById']); //api delete user by id
+    Route::post('/user/logout', [LoginController::class, 'logout']); //api logout
 });
