@@ -7,4 +7,6 @@ use App\Http\Controllers\loginController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/login', function () {
+    return view('login');
+});
